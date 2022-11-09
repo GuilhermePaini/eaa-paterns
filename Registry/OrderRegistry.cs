@@ -19,8 +19,12 @@ namespace Registry
         {
             get
             {
-                if (!_orders.ContainsKey(key))
+                if (!_orders.ContainsKey(key)) {
+                    // ao invés de jogar uma exceção, pode ser feita uma busca 
+                    // em banco e depois adicionar essa chave ao registry
+                    // caso a chave não seja encontrada em banco, ai sim retornamos a exceção
                     throw new ArgumentException($"{key} is not registered");
+                }
                 return _orders[key];
             }
         }
